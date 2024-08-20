@@ -22,22 +22,22 @@ export class CursoModel {
     }
 
     async crearCurso(data: any) {
-        const result = await conexion.query('INSERT INTO cursos SET ?',[data]);
+        const [result] = await conexion.query('INSERT INTO cursos SET ?',[data]);
         return result;
     }
 
     async actualizarCurso(id: Number, data: any) {
-        const result = await conexion.query('UPDATE cursos SET ? WHERE id = ?',[data, id]);
+        const [result] = await conexion.query('UPDATE cursos SET ? WHERE id = ?',[data, id]);
         return result;
     }
 
     async eliminarCurso(id: Number) {
-        const result = await conexion.query('DELETE FROM cursos WHERE id = ?', [id]);
+        const [result] = await conexion.query('DELETE FROM cursos WHERE id = ?', [id]);
         return result;
     }
 
     async verificarProfesor(id: Number) {
-        const cantidad: any = await conexion.query('SELECT COUNT(*) AS cant FROM profesores WHERE id = ?', [id]);
-        return cantidad[0].cant > 0;
+        const [cantidad] = await conexion.query('SELECT COUNT(*) AS cant FROM profesores WHERE id = ?', [id]);
+        return (cantidad as any)[0].cant > 0;
     }
 }

@@ -26,7 +26,7 @@ export const obtenerCursosPorId = async (req: Request, res: Response) => {
 export const crearCurso = async (req: Request, res: Response) => {
     try {
         const { nombre, descripcion, profesor_id } = req.body;
-        if (!await cursoModel.verificarProfesor(profesor_id)) {
+        if (!await cursoModel.verificarProfesor(Number(profesor_id))) {
             return res.status(500).json({ message: 'Profesor no encontrado'})
         }
         const result = await cursoModel.crearCurso({ nombre, descripcion, profesor_id });
